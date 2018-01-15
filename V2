@@ -1,0 +1,122 @@
+ 
+ 
+def process_image(image):
+    # NOTE: The output you return should be a color image (3 channel) for processing video below
+    # TODO: put your pipeline here,
+    # you should return the final output (image where lines are drawn on lanes)
+    # TODO: Build your pipeline that will draw lane lines on the test_images
+    #### create a mask for selected region ####
+    # Pull out the x and y sizes and make a copy of the image
+    ysize = image.shape[0]
+    xsize = image.shape[1]
+    lane_select = np.copy(image)
+    
+    # Define a triangle region of interest
+    left_bottom = [50, ysize]
+    right_bottom = [xsize-50, ysize]
+    apex = [xsize//2, ysize//2]
+    
+    # Perform a linear fit (y=Ax+B) to each of the three sides of the triangle
+    # np.polyfit returns the coefficients [A, B] of the fit
+    fit_left = np.polyfit((left_bottom[0], apex[0]), (left_bottom[1], apex[1]), 1)
+    fit_right = np.polyfit((right_bottom[0], apex[0]), (right_bottom[1], apex[1]), 1)
+    fit_bottom = np.polyfit((left_bottom[0], right_bottom[0]), (left_bottom[1], right_bottom[1]), 1)
+    
+    # Find the region inside the lines
+    XX, YY = np.meshgrid(np.arange(0, xsize), np.arange(0, ysize))
+    region_thresholds = (YY > (XX*fit_left[0] + fit_left[1])) & \
+                        (YY > (XX*fit_right[0] + fit_right[1])) & \
+                        (YY < (XX*fit_bottom[0] + fit_bottom[1]))
+    #### highlight lanes in selected region ####
+    red_threshold = 170
+    green_threshold = 170
+    blue_threshold = 50
+    rgb_threshold = [red_threshold, green_threshold, blue_threshold]
+    color_thresholds = (image[:,:, 0] < rgb_threshold[0])\
+                    | (image[:,:, 1] < rgb_threshold[1])\
+                    | (image[:,:, 2] < rgb_threshold[2])
+    lane_select[color_thresholds | ~region_thresholds] = [0,0,0]
+    
+    white_thresholds = (image[:,:, 0] > 220) | (image[:,:, 1] > 220) | (image[:,:, 2] > 220)
+    lane_select[~white_thresholds] = [0,0,0]
+    #### soften this image ####
+    gray = grayscale(lane_select)
+    kernel_size = 3
+    blur_image = gaussian_blur(gray, kernel_size)
+    #### create a copy of having edge highlighted image for selected region ####
+    low_threshold = 120
+    high_threshold = 155
+    edges = canny(blur_image, low_threshold, high_threshold)
+    
+    #### apply hough transform on edge image to get highlighted lane lines for selected region ####
+    
+    rho = 3  # distance resolution in pixels of the hough grid
+    theta = np.pi/180  # angular resolution in hough grid
+    threshold = 60     # minimum number of votes (intersections in hough grid)
+    min_line_length = 10  # minimum number of pixels making up a line
+    max_line_gap = 190    # maximum gap in pixels between connectable line segments
+    line_image = np.copy(image)*0   # creating a blank to draw lines on
+    
+    # Output "lines" containing endpoints of detected line segments
+    lines = cv2.HoughLinesP(edges, rho, theta, threshold, np.array([]), min_line_length, max_line_gap)
+
+    #### mask out all the colors from the hough transformed image except lane lines ####
+    bx_list = []
+    by_list = {}
+    m_list = {}
+    c_list = {}
+    # Iterate over "lines" and draw lines on a blank image
+    if lines is not None:
+        for line in lines:
+            for x1, y1, x2, y2 in line:
+                color = (255, 0, 0)
+                if math.sqrt(((y2-y1)**2) + ((x2-x1)**2)) >= 200:
+                    m = (y2-y1)/(x2-x1)
+                    c = y1 - m*x1
+                    if y1 > y2:
+                        x1, x2 = x2, x1
+                        y1, y2 = y2, y1
+                    # trim line from top
+                    y1 += 25
+                    if m != 0:
+                        try:
+                            x1 = int((y1 - c)/m)
+                        except:
+                            x2 = 0
+                    else:
+                        continue
+                    # stretch line till bottom
+                    if y2 != ysize:
+                        y2 = ysize
+                    if m != 0:
+                        try:
+                            x2 = int((y2 - c)/m)
+                        except:
+                            x2 = 0
+                    bx_list.append(x2)
+                    by_list[x2] = y2
+                    m_list[x2] = m
+                    c_list[m] = c
+                #cv2.line(line_image, (x1,y1), (x2,y2), color, 15)
+
+        bx_list.sort()
+        try:
+            for x1 in (bx_list[0], bx_list[-1]):
+                y1 = by_list[x1]
+                m = m_list[x1]
+                c = c_list[m]
+                y2 = y1-200
+                if m != 0:
+                    x2 = int((y2 - c)/m)
+                else:
+                    x2 = x1
+                cv2.line(line_image, (x1,y1), (x2,y2), color, 5)
+        except:
+            pass
+    kernel_size = 5
+    line_image = gaussian_blur(line_image, kernel_size)
+    #plt.imshow(line_image)
+    #plt.show()
+    #### mask this image on original image within selected region ####
+    result = cv2.addWeighted(image, 0.9, line_image, 1, 0)
+    return result

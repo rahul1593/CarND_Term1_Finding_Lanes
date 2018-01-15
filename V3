@@ -1,0 +1,111 @@
+ 
+pre_data = []
+
+def process_image(image):
+    global pre_data
+    #### create a mask for selected region ####
+    # Pull out the x and y sizes and make a copy of the image
+    ysize = image.shape[0]
+    xsize = image.shape[1]
+    lane_select = np.copy(image)
+
+    # Define a triangle region of interest
+    left_bottom = [50, ysize-20]
+    right_bottom = [xsize-50, ysize-20]
+    apex = [xsize//2, ysize//2]
+
+    # Perform a linear fit (y=Ax+B) to each of the three sides of the triangle
+    # np.polyfit returns the coefficients [A, B] of the fit
+    fit_left = np.polyfit((left_bottom[0], apex[0]), (left_bottom[1], apex[1]), 1)
+    fit_right = np.polyfit((right_bottom[0], apex[0]), (right_bottom[1], apex[1]), 1)
+    fit_bottom = np.polyfit((left_bottom[0], right_bottom[0]), (left_bottom[1], right_bottom[1]), 1)
+
+    # Find the region inside the lines
+    XX, YY = np.meshgrid(np.arange(0, xsize), np.arange(0, ysize))
+    region_thresholds = (YY > (XX*fit_left[0] + fit_left[1])) & \
+                        (YY > (XX*fit_right[0] + fit_right[1])) & \
+                        (YY < (XX*fit_bottom[0] + fit_bottom[1]))
+
+    #### highlight lanes in selected region ####
+    red_threshold = np.median(image[:,:, 0])*120/255
+    green_threshold = np.median(image[:,:, 0])*160/255
+    blue_threshold = np.median(image[:,:, 0])*50/255
+    rgb_threshold = [red_threshold, green_threshold, blue_threshold]
+    color_thresholds = (image[:,:, 0] < rgb_threshold[0])\
+                    | (image[:,:, 1] < rgb_threshold[1])\
+                    | (image[:,:, 2] < rgb_threshold[2])
+
+    lane_select[color_thresholds] = [0,0,0]
+    
+    #### soften this image ####
+    white_thresholds = (image[:,:, 0] > 220) | (image[:,:, 1] > 220) | (image[:,:, 2] > 220)
+    lane_select[~white_thresholds] = [0,0,0]
+    kernel_size = 13
+    blur_image = gaussian_blur(lane_select, kernel_size)
+    #gray = grayscale(lane_select)
+    #### create a copy of having edge highlighted image for selected region ####
+    # compute the median of the single channel pixel intensities
+    v = np.median(image)
+    sigma=0.33
+     # apply automatic Canny edge detection using the computed median
+    low_threshold = int(max(0, (1.0 - sigma) * v))
+    high_threshold = int(min(255, (1.0 + sigma) * v))
+    #low_threshold = 50
+    #high_threshold = 15
+    blur_image[~region_thresholds] = [0,0,0]
+    edges = canny(blur_image, low_threshold, high_threshold)
+    #return blur_image
+    #### apply hough transform on edge image to get highlighted lane lines for selected region ####
+    rho = 1  # distance resolution in pixels of the hough grid
+    theta = np.pi/180  # angular resolution in hough grid
+    threshold = 20     # minimum number of votes (intersections in hough grid)
+    min_line_len = 10  # minimum number of pixels making up a line
+    max_line_gap = 200    # maximum gap in pixels between connectable line segments
+    line_image = np.copy(image)   
+    line_only_image = np.copy(image)*0   # creating a blank to draw lines on
+    # Output "lines" containing endpoints of detected line segments
+    #line_image = hough_lines(edges, rho, theta, threshold, min_line_len, max_line_gap)
+    lines = cv2.HoughLinesP(edges, rho, theta, threshold, np.array([]), min_line_length, max_line_gap)
+
+    #### mask out all the colors from the hough transformed image except lane lines ####
+    #draw_lines(line_image, lines)
+    # find positive and negative slope lines and get average positive and negative slopes respectively
+    pm, pc, pl, nm, nc, nl = [], [], [], [], [], []
+    for line in lines:
+        for x1, y1, x2, y2 in line:
+            m = (y2-y1)/(x2-x1)
+            c = y1 - m*x1
+            l = math.sqrt(((y2-y1)**2) + ((x2-x1)**2))
+            if m < 0:
+                nm.append(m)
+                nc.append(c)
+                nl.append(l)
+            elif m > 0:
+                pm.append(m)
+                pc.append(c)
+                pl.append(l)
+    # get the average of slopes
+    a_pm = np.average(pm, weights=pl)
+    a_nm = np.average(nm, weights=nl)
+
+    a_pc = np.average(pc, weights=pl)
+    a_nc = np.average(nc, weights=nl)
+
+    lines = []
+    if len(pre_data) == 0:
+        pre_data = [[a_pm, a_pc],[a_nm, a_nc]]
+    
+    cur_data = [[a_pm, a_pc],[a_nm, a_nc]] 
+    for i in range(2):
+        m = (cur_data[i][0] + pre_data[i][0])/2
+        c = (cur_data[i][1] + pre_data[i][1])/2
+        y1 = ysize
+        x1 = int((y1 - c)/m)
+        y2 = y1-(ysize//3)-30
+        x2 = int((y2 - c)/m)
+        line = [[x1, y1, x2, y2]]
+        lines.append(line)
+    
+    draw_lines(line_only_image, lines, thickness=15)
+    result = cv2.addWeighted(image, 0.8, line_only_image, 1, 0)
+    return result
