@@ -8,8 +8,8 @@ In this project, I'm going to identify lane lines on the road. The lane lines co
 Following are some of the images used for testing the pipeline:
 <table style="text-align:center;font-size:11pt">
 <tr>
-<td><img src="./test_images/solidWhiteCurve.jpg" width="420" alt="White lane lines" style="display:block"/>Img1: White lane lines</td>
-<td><img src="./test_images/whiteCarLaneSwitch.jpg" width="420" alt="Yellow lane lines" style="display:block"/>Img2: Yellow lane lines</td>
+<td style="width:420px"><img src="./test_images/solidWhiteCurve.jpg" width="420" alt="White lane lines" style="display:block"/>Img1: White lane lines</td>
+<td style="width:420px"><img src="./test_images/whiteCarLaneSwitch.jpg" width="420" alt="Yellow lane lines" style="display:block"/>Img2: Yellow lane lines</td>
 </tr>
 <tr>
 <td><img src="./test_images/solidWhiteRight.jpg" width="420" alt="Another white lane" style="display:block"/>Img3: Another white lane</td>
