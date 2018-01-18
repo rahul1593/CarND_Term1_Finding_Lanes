@@ -23,7 +23,7 @@ Following are some of the images used for testing the pipeline:
 
 ## Pipeline Description
 
-The pipeline consists of 6 steps:
+This pipeline consists of 6 steps:
 1. Decide optimal color thresholds
 2. Decide region of interest
 3. Mask out unwanted colors and region
