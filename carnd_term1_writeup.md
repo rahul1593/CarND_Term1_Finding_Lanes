@@ -6,6 +6,7 @@
 In this project, I'm going to identify lane lines on the road. The lane lines could be white or yellow in color. The distance between dashed lane lines also needs to be accounted. The lane lines may have the shadow of nearby objects like trees on them.
 
 Following are some of the images used for testing the pipeline:
+![](./test_images/solidWhiteCurve.jpg?raw=true)
 <table style="text-align:center;font-size:11pt">
 <tr>
 <td style="width:420px"><img src="./test_images/solidWhiteCurve.jpg" width="420" alt="White lane lines" style="display:block"/>Img1: White lane lines</td>
