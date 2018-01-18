@@ -8,16 +8,16 @@ In this project, I'm going to identify lane lines on the road. The lane lines co
 Following are some of the images used for testing the pipeline:
 <table style="text-align:center;font-size:11pt">
 <tr>
-<td style="width:50%"><img src="./test_images/solidWhiteCurve.jpg" width="420" alt="White lane lines" style="display:block"/>Img1: White lane lines</td>
-<td style="width:50%"><img src="./test_images/whiteCarLaneSwitch.jpg" width="420" alt="Yellow lane lines" style="display:block"/>Img2: Yellow lane lines</td>
+<td style="width:50%"><img src="./test_images/solidWhiteCurve.jpg" width="420" alt="White lane lines" style="display:block"/><br>Img1: White lane lines</td>
+<td style="width:50%"><img src="./test_images/whiteCarLaneSwitch.jpg" width="420" alt="Yellow lane lines" style="display:block"/><br>Img2: Yellow lane lines</td>
 </tr>
 <tr>
-<td><img src="./test_images/solidWhiteRight.jpg" width="420" alt="Another white lane" style="display:block"/>Img3: Another white lane</td>
-<td><img src="./test_images/lane_test3.jpg" width="420" alt="Shaded yellow lane" style="display:block"/>Img4: Shaded yellow lane</td>
+<td><img src="./test_images/solidWhiteRight.jpg" width="420" alt="Another white lane" style="display:block"/><br>Img3: Another white lane</td>
+<td><img src="./test_images/lane_test3.jpg" width="420" alt="Shaded yellow lane" style="display:block"/><br>Img4: Shaded yellow lane</td>
 </tr>
 <tr>
-<td><img src="./test_images/lane_test4.jpg" width="420" alt="Changing road color" style="display:block"/>Img5: Changing road color</td>
-<td><img src="./test_images/lane_test7.jpg" width="420" alt="Shaded yellow lane with changing road color" style="display:block"/>Img6: Shaded yellow lane with changing road color</td>
+<td><img src="./test_images/lane_test4.jpg" width="420" alt="Changing road color" style="display:block"/><br>Img5: Changing road color</td>
+<td><img src="./test_images/lane_test7.jpg" width="420" alt="Shaded yellow lane with changing road color" style="display:block"/><br>Img6: Shaded yellow lane with changing road color</td>
 </tr>
 </table>
 
