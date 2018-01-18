@@ -34,9 +34,9 @@ The pipeline consists of 6 steps:
 ### 1. Decide optimal color thresholds
 
 Color thresholds for each of red, green and blue color are decide by using the following formula:
-"Let \begin{equation*}
+![equation](\begin{equation*}
 colorThreshold = regularColorThreshold - \frac{(regularMedianColor - imageColorMedian)}{effectFactor}
-\end{equation*}"
+\end{equation*})
 Here *regularColorThreshold* is the threshold color value chosen for an image having median color equal to *regularMedianColor* approximately. *imageColorMedian* is the median of a color in current image. *effectFactor* is used to decide the effect of difference between color median of current and standard image on the regular threshold value.
 
 This formula could help to calibrate the color intensities moderately in different lighting conditions.
