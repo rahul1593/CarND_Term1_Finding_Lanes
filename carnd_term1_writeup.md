@@ -52,16 +52,16 @@ After the color and region thresholds are decided, now is the time to mask out t
 Following are the images after masking out the unwanted colors and area:
 <table style="text-align:center;font-size:11pt">
 <tr>
-<td><img src="./test_images_output/roi/solidWhiteCurve.jpg" width="420" alt="White lane lines" style="display:block"/>Img1: White lane lines</td>
-<td><img src="./test_images_output/roi/whiteCarLaneSwitch.jpg" width="420" alt="Yellow lane lines" style="display:block"/>Img2: Yellow lane lines</td>
+<td><img src="./test_images_output/roi/solidWhiteCurve.jpg" width="420" alt="White lane lines" style="display:block"/><br>Img1: White lane lines</td>
+<td><img src="./test_images_output/roi/whiteCarLaneSwitch.jpg" width="420" alt="Yellow lane lines" style="display:block"/><br>Img2: Yellow lane lines</td>
 </tr>
 <tr>
-<td><img src="./test_images_output/roi/solidWhiteRight.jpg" width="420" alt="Another white lane" style="display:block"/>Img3: Another white lane</td>
-<td><img src="./test_images_output/roi/lane_test3.jpg" width="420" alt="Shaded yellow lane" style="display:block"/>Img4: Shaded yellow lane</td>
+<td><img src="./test_images_output/roi/solidWhiteRight.jpg" width="420" alt="Another white lane" style="display:block"/><br>Img3: Another white lane</td>
+<td><img src="./test_images_output/roi/lane_test3.jpg" width="420" alt="Shaded yellow lane" style="display:block"/><br>Img4: Shaded yellow lane</td>
 </tr>
 <tr>
-<td><img src="./test_images_output/roi/lane_test4.jpg" width="420" alt="Changing road color" style="display:block"/>Img5: Changing road color</td>
-<td><img src="./test_images_output/roi/lane_test7.jpg" width="420" alt="Shaded yellow lane with changing road color" style="display:block"/>Img6: Shaded yellow lane with changing road color</td>
+<td><img src="./test_images_output/roi/lane_test4.jpg" width="420" alt="Changing road color" style="display:block"/><br>Img5: Changing road color</td>
+<td><img src="./test_images_output/roi/lane_test7.jpg" width="420" alt="Shaded yellow lane with changing road color" style="display:block"/><br>Img6: Shaded yellow lane with changing road color</td>
 </tr>
 </table>
 
@@ -104,16 +104,16 @@ def auto_threshold_canny(original_image, src_image):
 Following are the images after edge detection:
 <table style="text-align:center;font-size:11pt">
 <tr>
-<td><img src="./test_images_output/edges/solidWhiteCurve.jpg" width="420" alt="White lane lines" style="display:block"/>Img1: White lane lines</td>
-<td><img src="./test_images_output/edges/whiteCarLaneSwitch.jpg" width="420" alt="Yellow lane lines" style="display:block"/>Img2: Yellow lane lines</td>
+<td><img src="./test_images_output/edges/solidWhiteCurve.jpg" width="420" alt="White lane lines" style="display:block"/><br>Img1: White lane lines</td>
+<td><img src="./test_images_output/edges/whiteCarLaneSwitch.jpg" width="420" alt="Yellow lane lines" style="display:block"/><br>Img2: Yellow lane lines</td>
 </tr>
 <tr>
-<td><img src="./test_images_output/edges/solidWhiteRight.jpg" width="420" alt="Another white lane" style="display:block"/>Img3: Another white lane</td>
-<td><img src="./test_images_output/edges/lane_test3.jpg" width="420" alt="Shaded yellow lane" style="display:block"/>Img4: Shaded yellow lane</td>
+<td><img src="./test_images_output/edges/solidWhiteRight.jpg" width="420" alt="Another white lane" style="display:block"/><br>Img3: Another white lane</td>
+<td><img src="./test_images_output/edges/lane_test3.jpg" width="420" alt="Shaded yellow lane" style="display:block"/><br>Img4: Shaded yellow lane</td>
 </tr>
 <tr>
-<td><img src="./test_images_output/edges/lane_test4.jpg" width="420" alt="Changing road color" style="display:block"/>Img5: Changing road color</td>
-<td><img src="./test_images_output/edges/lane_test7.jpg" width="420" alt="Shaded yellow lane with changing road color" style="display:block"/>Img6: Shaded yellow lane with changing road color</td>
+<td><img src="./test_images_output/edges/lane_test4.jpg" width="420" alt="Changing road color" style="display:block"/><br>Img5: Changing road color</td>
+<td><img src="./test_images_output/edges/lane_test7.jpg" width="420" alt="Shaded yellow lane with changing road color" style="display:block"/><br>Img6: Shaded yellow lane with changing road color</td>
 </tr>
 </table>
 
@@ -126,16 +126,16 @@ To draw lines, default `draw_lines` function is used directly on a copy of the o
 Following are the images after drawing lines on copy of original image:
 <table style="text-align:center;font-size:11pt">
 <tr>
-<td><img src="./test_images_output/hough_lines/solidWhiteCurve.jpg" width="420" alt="White lane lines" style="display:block"/>Img1: White lane lines</td>
-<td><img src="./test_images_output/hough_lines/whiteCarLaneSwitch.jpg" width="420" alt="Yellow lane lines" style="display:block"/>Img2: Yellow lane lines</td>
+<td><img src="./test_images_output/hough_lines/solidWhiteCurve.jpg" width="420" alt="White lane lines" style="display:block"/><br>Img1: White lane lines</td>
+<td><img src="./test_images_output/hough_lines/whiteCarLaneSwitch.jpg" width="420" alt="Yellow lane lines" style="display:block"/><br>Img2: Yellow lane lines</td>
 </tr>
 <tr>
-<td><img src="./test_images_output/hough_lines/solidWhiteRight.jpg" width="420" alt="Another white lane" style="display:block"/>Img3: Another white lane</td>
-<td><img src="./test_images_output/hough_lines/lane_test3.jpg" width="420" alt="Shaded yellow lane" style="display:block"/>Img4: Shaded yellow lane</td>
+<td><img src="./test_images_output/hough_lines/solidWhiteRight.jpg" width="420" alt="Another white lane" style="display:block"/><br>Img3: Another white lane</td>
+<td><img src="./test_images_output/hough_lines/lane_test3.jpg" width="420" alt="Shaded yellow lane" style="display:block"/><br>Img4: Shaded yellow lane</td>
 </tr>
 <tr>
-<td><img src="./test_images_output/hough_lines/lane_test4.jpg" width="420" alt="Changing road color" style="display:block"/>Img5: Changing road color</td>
-<td><img src="./test_images_output/hough_lines/lane_test7.jpg" width="420" alt="Shaded yellow lane with changing road color" style="display:block"/>Img6: Shaded yellow lane with changing road color</td>
+<td><img src="./test_images_output/hough_lines/lane_test4.jpg" width="420" alt="Changing road color" style="display:block"/><br>Img5: Changing road color</td>
+<td><img src="./test_images_output/hough_lines/lane_test7.jpg" width="420" alt="Shaded yellow lane with changing road color" style="display:block"/><br>Img6: Shaded yellow lane with changing road color</td>
 </tr>
 </table>
 
@@ -152,16 +152,16 @@ Lines are averaged by calculating weighted averages for slopes and intercepts us
 Following images are the output of this pipeline:
 <table style="text-align:center;font-size:11pt">
 <tr>
-<td><img src="./test_images_output/output/solidWhiteCurve.jpg" width="420" alt="White lane lines" style="display:block"/>Img1: White lane lines</td>
-<td><img src="./test_images_output/output/whiteCarLaneSwitch.jpg" width="420" alt="Yellow lane lines" style="display:block"/>Img2: Yellow lane lines</td>
+<td><img src="./test_images_output/output/solidWhiteCurve.jpg" width="420" alt="White lane lines" style="display:block"/><br>Img1: White lane lines</td>
+<td><img src="./test_images_output/output/whiteCarLaneSwitch.jpg" width="420" alt="Yellow lane lines" style="display:block"/><br>Img2: Yellow lane lines</td>
 </tr>
 <tr>
-<td><img src="./test_images_output/output/solidWhiteRight.jpg" width="420" alt="Another white lane" style="display:block"/>Img3: Another white lane</td>
-<td><img src="./test_images_output/output/lane_test3.jpg" width="420" alt="Shaded yellow lane" style="display:block"/>Img4: Shaded yellow lane</td>
+<td><img src="./test_images_output/output/solidWhiteRight.jpg" width="420" alt="Another white lane" style="display:block"/><br>Img3: Another white lane</td>
+<td><img src="./test_images_output/output/lane_test3.jpg" width="420" alt="Shaded yellow lane" style="display:block"/><br>Img4: Shaded yellow lane</td>
 </tr>
 <tr>
-<td><img src="./test_images_output/output/lane_test4.jpg" width="420" alt="Changing road color" style="display:block"/>Img5: Changing road color</td>
-<td><img src="./test_images_output/output/lane_test7.jpg" width="420" alt="Shaded yellow lane with changing road color" style="display:block"/>Img6: Shaded yellow lane with changing road color</td>
+<td><img src="./test_images_output/output/lane_test4.jpg" width="420" alt="Changing road color" style="display:block"/><br>Img5: Changing road color</td>
+<td><img src="./test_images_output/output/lane_test7.jpg" width="420" alt="Shaded yellow lane with changing road color" style="display:block"/><br>Img6: Shaded yellow lane with changing road color</td>
 </tr>
 </table>
 
@@ -178,7 +178,7 @@ But, simple averaging of annotation lines across past frames might lead to sligh
 Following is the output for video `challenge.mp4`.
 
 <video width="960" height="540" controls>
-  <source src="./test_videos_output/challenge.mp4">
+  <source src="https://github.com/rahul1593/CarND_Term1_Finding_Lanes/blob/master/test_videos_output/challenge.mp4">
 Your browser does not support the video tag.
 </video>
 
