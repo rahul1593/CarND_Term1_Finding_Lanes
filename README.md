@@ -1,6 +1,7 @@
 # **Finding Lane Lines on the Road** 
-
+---
 This project aims at finding lane lines on the road by processing a series of image frame from a video.
+
 <img src="examples/laneLines_thirdPass.jpg" width="480" alt="Combined Image" />
 ---
 ## Crucial Files
