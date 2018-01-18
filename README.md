@@ -17,3 +17,6 @@ Following are the important directories and data contained in them:
 * `test_videos`: contains videos for testing
 * `test_videos_output`: contains output for the input videos in directory `test_videos`
 
+### References
+
+* Auto threshold calculation for canny edge detection: https://www.pyimagesearch.com/2015/04/06/zero-parameter-automatic-canny-edge-detection-with-python-and-opencv/
